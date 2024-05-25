@@ -27,15 +27,15 @@ export default function AddTopic() {
       });
       if (res.ok) {
         router.push('/');
+        router.refresh();
+
       } else {
         throw new Error("Failed to create a topic");
       }
     } catch (error) {
       console.log(error);
     }
-    if (res.ok) {
-      router.refresh();
-    }
+    
   };
 
   return (
