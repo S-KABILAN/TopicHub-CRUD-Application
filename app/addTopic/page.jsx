@@ -33,6 +33,9 @@ export default function AddTopic() {
     } catch (error) {
       console.log(error);
     }
+    if (res.ok) {
+      router.refresh();
+    }
   };
 
   return (

@@ -1,4 +1,6 @@
 import EditTopicForm from "@/components/EditTopicForm";
+import { useRouter } from "next/navigation";
+
 
 const getTopicById = async (id) => {
   try {
