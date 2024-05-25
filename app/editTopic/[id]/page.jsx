@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 
 
 const getTopicById = async (id) => {
+    const router = useRouter();
+
   try {
     const res = await fetch(`https://topic-hub-crud-application-jpw2.vercel.app/api/topics/${id}`, {
       cache: 'no-store',
@@ -18,6 +20,10 @@ const getTopicById = async (id) => {
   } catch (error) {
     console.log(error);
   }
+  if (res.ok) {
+    router.refresh();
+  }
+
 }
 
 export default async function EditTopic({ params }) {
