@@ -4,7 +4,7 @@ import { HiPencilAlt } from "react-icons/hi";
 
 const getTopics = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/topics", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/topics`, {
       cache: "no-store",
     });
 
@@ -15,11 +15,16 @@ const getTopics = async () => {
     return res.json();
   } catch (error) {
     console.log("Error loading topics: ", error);
+    return { topics: [] };
   }
 };
 
 export default async function TopicsList() {
   const { topics } = await getTopics();
+
+  if (!topics || topics.length === 0) {
+    return <p>No topics available.</p>;
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
@@ -34,8 +39,10 @@ export default async function TopicsList() {
           </div>
           <div className="flex justify-end gap-3">
             <RemoveBtn id={t._id} />
-            <Link href={`/editTopic/${t._id}`} className="bg-indigo-500 text-white p-2 rounded-lg shadow-lg flex items-center hover:bg-indigo-600 transition duration-300">
+            <Link href={`/editTopic/${t._id}`}>
+              <a className="text-purple-600 hover:text-purple-800 transition duration-300">
                 <HiPencilAlt size={24} />
+              </a>
             </Link>
           </div>
         </div>
