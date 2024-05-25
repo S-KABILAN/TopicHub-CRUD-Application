@@ -13,7 +13,7 @@ const getTopics = async () => {
     }
 
     const data = await res.json();
-    return data.topics ? data : { topics: [] };  // Ensure 'topics' is defined
+    return { topics: data.topics || [] };  // Ensure 'topics' is defined
   } catch (error) {
     console.log("Error loading topics: ", error);
     return { topics: [] };  // Return a default value in case of error
@@ -22,6 +22,10 @@ const getTopics = async () => {
 
 export default async function TopicsList() {
   const { topics } = await getTopics() || { topics: [] };  // Ensure 'topics' is defined
+
+  if (!topics.length) {
+    return <p>No topics available</p>;
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
@@ -36,10 +40,10 @@ export default async function TopicsList() {
           </div>
           <div className="flex justify-end gap-3">
             <RemoveBtn id={t._id} />
-            <Link href={`/editTopic/${t._id}`}  className="text-purple-600 hover:text-purple-800 transition duration-300">
-            
+            <Link href={`/editTopic/${t._id}`}>
+              <a className="text-purple-600 hover:text-purple-800 transition duration-300">
                 <HiPencilAlt size={24} />
-              
+              </a>
             </Link>
           </div>
         </div>
