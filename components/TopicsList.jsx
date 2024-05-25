@@ -4,7 +4,7 @@ import { HiPencilAlt } from "react-icons/hi";
 
 const getTopics = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/topics", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/topics`, {
       cache: "no-store",
     });
 
@@ -21,7 +21,7 @@ const getTopics = async () => {
 };
 
 export default async function TopicsList() {
-  const { topics } = await getTopics();
+  const { topics } = await getTopics() || { topics: [] };  // Ensure 'topics' is defined
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
@@ -36,8 +36,8 @@ export default async function TopicsList() {
           </div>
           <div className="flex justify-end gap-3">
             <RemoveBtn id={t._id} />
-            <Link href={`/editTopic/${t._id}`} className="text-purple-600 hover:text-purple-800 transition duration-300"
->
+            <Link href={`/editTopic/${t._id}`}  className="text-purple-600 hover:text-purple-800 transition duration-300">
+            
                 <HiPencilAlt size={24} />
               
             </Link>
