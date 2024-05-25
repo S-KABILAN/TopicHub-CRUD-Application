@@ -11,7 +11,7 @@ export default function EditTopicForm({ id, title, description }) {
     e.preventDefault();
 
     try {
-      const res = await fetch(`https://topic-hub-crud-application-jpw2.vercel.app/api/topics`, {
+      const res = await fetch(`https://topic-hub-crud-application-jpw2.vercel.app/api/topics/${id}`, {
         method: 'PUT',
         headers: {
           "Content-type": 'application/json'
