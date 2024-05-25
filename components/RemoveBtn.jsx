@@ -1,3 +1,8 @@
+'use client';
+
+import { HiOutlineTrash } from 'react-icons/hi';
+import { useRouter } from 'next/navigation';
+
 export default function RemoveBtn({ id }) {
   const router = useRouter();
 
