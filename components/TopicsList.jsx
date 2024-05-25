@@ -4,7 +4,7 @@ import { HiPencilAlt } from "react-icons/hi";
 
 const getTopics = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/topics`, {
+    const res = await fetch("http://localhost:3000/api/topics", {
       cache: "no-store",
     });
 
@@ -12,20 +12,14 @@ const getTopics = async () => {
       throw new Error("Failed to fetch topics");
     }
 
-    const data = await res.json();
-    return { topics: data.topics || [] };  // Ensure 'topics' is defined
+    return res.json();
   } catch (error) {
     console.log("Error loading topics: ", error);
-    return { topics: [] };  // Return a default value in case of error
   }
 };
 
 export default async function TopicsList() {
-  const { topics } = await getTopics() || { topics: [] };  // Ensure 'topics' is defined
-
-  if (!topics.length) {
-    return <p>No topics available</p>;
-  }
+  const { topics } = await getTopics();
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
@@ -40,10 +34,8 @@ export default async function TopicsList() {
           </div>
           <div className="flex justify-end gap-3">
             <RemoveBtn id={t._id} />
-            <Link href={`/editTopic/${t._id}`} className="text-purple-600 hover:text-purple-800 transition duration-300">
-              
+            <Link href={`/editTopic/${t._id}`} className="bg-indigo-500 text-white p-2 rounded-lg shadow-lg flex items-center hover:bg-indigo-600 transition duration-300">
                 <HiPencilAlt size={24} />
-              
             </Link>
           </div>
         </div>
