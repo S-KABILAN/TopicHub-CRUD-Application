@@ -18,7 +18,7 @@ export default function AddTopic() {
     }
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/topics`, {
+      const res = await fetch("https://topic-hub-crud-application-jpw2.vercel.app/api/topics", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

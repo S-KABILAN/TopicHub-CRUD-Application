@@ -9,7 +9,7 @@ export default function RemoveBtn({ id }) {
   const removeTopic = async () => {
     const confirmed = confirm('Are you sure?');
     if (confirmed) {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/topics?id=${id}`, {
+      const res = await fetch(`https://topic-hub-crud-application-jpw2.vercel.app/api/topics?id=${id}`, {
         method: 'DELETE',
       });
       if (res.ok) {
