@@ -40,10 +40,10 @@ export default async function TopicsList() {
           </div>
           <div className="flex justify-end gap-3">
             <RemoveBtn id={t._id} />
-            <Link href={`/editTopic/${t._id}`}>
-              <a className="text-purple-600 hover:text-purple-800 transition duration-300">
+            <Link href={`/editTopic/${t._id}`} className="text-purple-600 hover:text-purple-800 transition duration-300">
+              
                 <HiPencilAlt size={24} />
-              </a>
+              
             </Link>
           </div>
         </div>
