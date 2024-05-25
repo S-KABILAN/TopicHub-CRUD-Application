@@ -12,9 +12,11 @@ const getTopics = async () => {
       throw new Error("Failed to fetch topics");
     }
 
-    return res.json();
+    const data = await res.json();
+    return data.topics ? data : { topics: [] };  // Ensure 'topics' is defined
   } catch (error) {
     console.log("Error loading topics: ", error);
+    return { topics: [] };  // Return a default value in case of error
   }
 };
 
@@ -34,8 +36,10 @@ export default async function TopicsList() {
           </div>
           <div className="flex justify-end gap-3">
             <RemoveBtn id={t._id} />
-            <Link href={`/editTopic/${t._id}`} className="bg-indigo-500 text-white p-2 rounded-lg shadow-lg flex items-center hover:bg-indigo-600 transition duration-300">
+            <Link href={`/editTopic/${t._id}`} className="text-purple-600 hover:text-purple-800 transition duration-300"
+>
                 <HiPencilAlt size={24} />
+              
             </Link>
           </div>
         </div>
