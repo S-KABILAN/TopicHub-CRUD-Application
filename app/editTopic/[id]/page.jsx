@@ -1,3 +1,6 @@
+'use client';
+
+
 import EditTopicForm from "@/components/EditTopicForm";
 import { useRouter } from "next/navigation";
 
